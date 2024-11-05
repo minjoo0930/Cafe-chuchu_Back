@@ -1,0 +1,202 @@
+[
+    {
+        "userid": "user001",
+        "name": "김민수",
+        "email": "minsu.kim@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-1234-5678",
+        "cafe_preferences": ["경치가 좋은", "조용한", "넓은", "인테리어 예쁜", "사람 많은", "사진찍기 좋은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user002",
+        "name": "이수진",
+        "email": "sujin.lee@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-8765-4321",
+        "cafe_preferences": ["조용한", "사진찍기 좋은", "인테리어 예쁜", "사람 많은", "경치가 좋은", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user003",
+        "name": "박영수",
+        "email": "youngsu.park@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-4567-8901",
+        "cafe_preferences": ["넓은", "경치가 좋은", "조용한", "사진찍기 좋은", "사람 많은", "인테리어 예쁜"],
+        "usertype": 0
+    },
+    {
+        "userid": "user004",
+        "name": "최은영",
+        "email": "eunyoung.choi@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-7890-1234",
+        "cafe_preferences": ["인테리어 예쁜", "조용한", "사진찍기 좋은", "경치가 좋은", "사람 많은", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user005",
+        "name": "홍길동",
+        "email": "gildong.hong@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-5678-1234",
+        "cafe_preferences": ["사람 많은", "넓은", "사진찍기 좋은", "조용한", "경치가 좋은", "인테리어 예쁜"],
+        "usertype": 0
+    },
+    {
+        "userid": "user006",
+        "name": "임은지",
+        "email": "eunji.im@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-3456-7890",
+        "cafe_preferences": ["사진찍기 좋은", "경치가 좋은", "넓은", "인테리어 예쁜", "사람 많은", "조용한"],
+        "usertype": 0
+    },
+    {
+        "userid": "user007",
+        "name": "정현우",
+        "email": "hyunwoo.jung@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-4567-8910",
+        "cafe_preferences": ["조용한", "경치가 좋은", "사진찍기 좋은", "넓은", "인테리어 예쁜", "사람 많은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user008",
+        "name": "신수연",
+        "email": "suyeon.shin@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-7891-2345",
+        "cafe_preferences": ["인테리어 예쁜", "조용한", "넓은", "사진찍기 좋은", "사람 많은", "경치가 좋은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user009",
+        "name": "김영호",
+        "email": "youngho.kim@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-3214-5678",
+        "cafe_preferences": ["경치가 좋은", "조용한", "사람 많은", "넓은", "인테리어 예쁜", "사진찍기 좋은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user010",
+        "name": "이민아",
+        "email": "mina.lee@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-5678-2341",
+        "cafe_preferences": ["조용한", "사람 많은", "경치가 좋은", "사진찍기 좋은", "인테리어 예쁜", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user011",
+        "name": "홍지훈",
+        "email": "jihun.hong@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-2345-6781",
+        "cafe_preferences": ["인테리어 예쁜", "경치가 좋은", "조용한", "사진찍기 좋은", "사람 많은", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user012",
+        "name": "강서연",
+        "email": "seoyeon.kang@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-6781-2345",
+        "cafe_preferences": ["조용한", "경치가 좋은", "사람 많은", "인테리어 예쁜", "사진찍기 좋은", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user013",
+        "name": "문성준",
+        "email": "sungjun.moon@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-3456-7890",
+        "cafe_preferences": ["넓은", "조용한", "경치가 좋은", "사람 많은", "사진찍기 좋은", "인테리어 예쁜"],
+        "usertype": 0
+    },
+    {
+        "userid": "user014",
+        "name": "이준혁",
+        "email": "junhyuk.lee@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-4567-8901",
+        "cafe_preferences": ["사진찍기 좋은", "사람 많은", "인테리어 예쁜", "조용한", "경치가 좋은", "넓은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user015",
+        "name": "박지영",
+        "email": "jiyoung.park@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-8910-2345",
+        "cafe_preferences": ["경치가 좋은", "조용한", "사람 많은", "사진찍기 좋은", "넓은", "인테리어 예쁜"],
+        "usertype": 0
+    },
+    {
+        "userid": "user016",
+        "name": "조은빈",
+        "email": "eunbin.jo@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-5678-1234",
+        "cafe_preferences": ["넓은", "인테리어 예쁜", "조용한", "경치가 좋은", "사람 많은", "사진찍기 좋은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user017",
+        "name": "안성훈",
+        "email": "sung.hun.an@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-6789-1234",
+        "cafe_preferences": ["사진찍기 좋은", "조용한", "넓은", "인테리어 예쁜", "경치가 좋은", "사람 많은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user018",
+        "name": "김혜진",
+        "email": "hyejin.kim@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-4567-6789",
+        "cafe_preferences": ["인테리어 예쁜", "경치가 좋은", "사진찍기 좋은", "넓은", "조용한", "사람 많은"],
+        "usertype": 0
+    },
+    {
+        "userid": "user019",
+        "name": "박준수",
+        "email": "junsu.park@example.com",
+        "password": "password123",
+        "gender": "male",
+        "phone": "010-8765-3456",
+        "cafe_preferences": ["조용한", "넓은", "사진찍기 좋은", "경치가 좋은", "사람 많은", "인테리어 예쁜"],
+        "usertype": 0
+    },
+    {
+        "userid": "user020",
+        "name": "정하늘",
+        "email": "haneul.jung@example.com",
+        "password": "password123",
+        "gender": "female",
+        "phone": "010-3456-9876",
+        "cafe_preferences": ["경치가 좋은", "조용한", "인테리어 예쁜", "사람 많은", "넓은", "사진찍기 좋은"],
+        "usertype": 0
+    }
+]

@@ -1,0 +1,162 @@
+[
+    {
+        "cafe_name": "카페 모던타임즈",
+        "location": "서울특별시 강남구 강남대로 123",
+        "category": ["경치가 좋은", "넓은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_63%2F1697679707110rs8kB_JPEG%2F%25BC%25F6%25C7%25FC%25B4%25E7%25281%2529.jpg"],
+        "open_time": "09:00",
+        "close_time": "22:00"
+    },
+    {
+        "cafe_name": "빈티지 플랜트",
+        "location": "서울특별시 종로구 대학로 45",
+        "category": ["인테리어 예쁜", "조용한"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_23%2F1697793837056cL3tV_JPEG%2F%25C1%25D7%25C7%25FC%25C0%25DA%25BA%25B4%25BF%25C0%25B0%25ED.jpg"],
+        "open_time": "10:00",
+        "close_time": "21:00"
+    },
+    {
+        "cafe_name": "포토 카페",
+        "location": "서울특별시 마포구 연남동 321",
+        "category": ["사진찍기 좋은", "경치가 좋은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_29%2F1697689671232rO3Yg_JPEG%2F%25C6%25A9%25B7%25AF%25B8%25AE.jpg"],
+        "open_time": "08:00",
+        "close_time": "20:00"
+    },
+    {
+        "cafe_name": "사람 많은 카페",
+        "location": "서울특별시 송파구 잠실동 99",
+        "category": ["사람 많은", "넓은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_48%2F1697772831074fEkpS_JPEG%2F%25C8%25F1%25B8%25F3.jpg"],
+        "open_time": "11:00",
+        "close_time": "23:00"
+    },
+    {
+        "cafe_name": "힐링 카페",
+        "location": "서울특별시 서대문구 신촌로 12",
+        "category": ["조용한", "경치가 좋은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_34%2F1697783837123gY9kJ_JPEG%2F%25B0%25A1%25C7%25E5%25B8%25AE%25C7%25FC%25C0%25CC.jpg"],
+        "open_time": "09:30",
+        "close_time": "21:30"
+    },
+    {
+        "cafe_name": "스페셜티 브루",
+        "location": "서울특별시 중구 을지로 33",
+        "category": ["인테리어 예쁜", "사람 많은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_56%2F1697682837153cQ3dJ_JPEG%2F%25B9%25B9%25BC%25FA%25B4%25E7%25281%2529.jpg"],
+        "open_time": "08:30",
+        "close_time": "20:00"
+    },
+    {
+        "cafe_name": "카페 안테로스",
+        "location": "서울특별시 서초구 반포대로 21",
+        "category": ["조용한", "넓은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_78%2F1697684837056cK3dV_JPEG%2F%25B8%25A5%25B5%25E9.jpg"],
+        "open_time": "10:00",
+        "close_time": "19:00"
+    },
+    {
+        "cafe_name": "어반 카페",
+        "location": "서울특별시 영등포구 여의도동 15",
+        "category": ["사람 많은", "조용한"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_52%2F1697685837103cF2jT_JPEG%2F%25BF%25A9%25C0%25CC.jpg"],
+        "open_time": "07:00",
+        "close_time": "22:00"
+    },
+    {
+        "cafe_name": "스튜디오 카페",
+        "location": "서울특별시 동대문구 신설동 44",
+        "category": ["사진찍기 좋은", "인테리어 예쁜"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_48%2F1697687837029rQ5fG_JPEG%2F%25C1%25F6%25C3%25A5.jpg"],
+        "open_time": "09:00",
+        "close_time": "19:30"
+    },
+    {
+        "cafe_name": "라이트 브루",
+        "location": "서울특별시 관악구 신림로 65",
+        "category": ["경치가 좋은", "넓은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_63%2F1697693837156hD3yW_JPEG%2F%25B0%25A1%25C7%25FC%25C4%25E3%25282%2529.jpg"],
+        "open_time": "10:00",
+        "close_time": "20:00"
+    },
+    {
+        "cafe_name": "이탈리안 커피",
+        "location": "서울특별시 서초구 서초대로 53",
+        "category": ["조용한", "사진찍기 좋은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_88%2F1697695837056cH3fK_JPEG%2F%25C5%25B8%25B8%25B9.jpg"],
+        "open_time": "09:00",
+        "close_time": "21:30"
+    },
+    {
+        "cafe_name": "블루버드",
+        "location": "서울특별시 노원구 중계동 124",
+        "category": ["경치가 좋은", "조용한"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_56%2F1697682837003jQ3jV_JPEG%2F%25C8%25AD%25C7%25FC%25281%2529.jpg"],
+        "open_time": "08:00",
+        "close_time": "22:00"
+    },
+    {
+        "cafe_name": "리버뷰 카페",
+        "location": "서울특별시 용산구 한강로 201",
+        "category": ["경치가 좋은", "인테리어 예쁜"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_72%2F1697692837166nE3eP_JPEG%2F%25B7%25A1%25C5%25B8%25B0%25A5.jpg"],
+        "open_time": "11:00",
+        "close_time": "23:00"
+    },
+    {
+        "cafe_name": "카페 메종",
+        "location": "서울특별시 강북구 수유동 55",
+        "category": ["조용한", "사람 많은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_36%2F1697697837056kM4nL_JPEG%2F%25C5%25B8%25C5%25B9.jpg"],
+        "open_time": "10:00",
+        "close_time": "22:00"
+    },
+    {
+        "cafe_name": "카페 그라찌에",
+        "location": "서울특별시 구로구 구로동 120",
+        "category": ["넓은", "사람 많은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_46%2F1697689837056hD7kB_JPEG%2F%25BF%25A9%25C0%25CE%25B4%25F5.jpg"],
+        "open_time": "09:00",
+        "close_time": "21:30"
+    },
+    {
+        "cafe_name": "숲속의 카페",
+        "location": "서울특별시 성북구 정릉로 33",
+        "category": ["경치가 좋은", "사진찍기 좋은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_92%2F1697684837095cH3fK_JPEG%2F%25B8%25F3%25C6%25F7%25C5%25E4.jpg"],
+        "open_time": "08:00",
+        "close_time": "22:00"
+    },
+    {
+        "cafe_name": "코지 카페",
+        "location": "서울특별시 광진구 자양로 89",
+        "category": ["인테리어 예쁜", "조용한"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_34%2F1697697837156hC5hL_JPEG%2F%25BF%25DC%25C0%25CC%25BC%25F6.jpg"],
+        "open_time": "10:00",
+        "close_time": "21:00"
+    },
+    {
+        "cafe_name": "스테이 커피",
+        "location": "서울특별시 성동구 성수동 23",
+        "category": ["사진찍기 좋은", "사람 많은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_29%2F1697699837157gJ8nF_JPEG%2F%25C7%25D0%25C1%25A2%25BF%25C1.jpg"],
+        "open_time": "09:30",
+        "close_time": "20:30"
+    },
+    {
+        "cafe_name": "햇살 카페",
+        "location": "서울특별시 강서구 방화로 12",
+        "category": ["경치가 좋은", "조용한"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_89%2F1697688837156jB9pL_JPEG%2F%25B8%25F0%25BD%25C5%25C5%25B9%25282%2529.jpg"],
+        "open_time": "08:30",
+        "close_time": "21:30"
+    },
+    {
+        "cafe_name": "모닝 커피",
+        "location": "서울특별시 마포구 망원동 91",
+        "category": ["조용한", "경치가 좋은"],
+        "image": ["https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231019_75%2F1697688837177dE5xP_JPEG%2F%25BB%25E7%25C0%25CC%25B4%25F5.jpg"],
+        "open_time": "07:00",
+        "close_time": "19:00"
+    }
+]
