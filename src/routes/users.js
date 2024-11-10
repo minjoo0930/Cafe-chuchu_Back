@@ -37,6 +37,7 @@ router.post('/register', async (req, res, next) => {
         return res.sendStatus(200);
     } catch (error) {
         console.error("회원가입 중 오류 발생:", error); // 에러 로그 추가
+        res.status(500).json({ success: false, message: "회원가입 중 오류가 발생했습니다.", error: error.message });
         next(error);
     }
 });
