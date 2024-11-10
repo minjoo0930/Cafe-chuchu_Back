@@ -36,6 +36,7 @@ router.post('/register', async (req, res, next) => {
         await newUser.save(); // 수정된 부분
         return res.sendStatus(200);
     } catch (error) {
+        console.error("회원가입 중 오류 발생:", error); // 에러 로그 추가
         next(error);
     }
 });
