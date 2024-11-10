@@ -18,8 +18,8 @@ router.get('/auth', auth, async (req, res, next) => {
 })
 
 
-//회원가입 route
-router.post('/register', async(req, res, next) => {
+// 회원가입 route
+router.post('/register', async (req, res, next) => {
     try {
         const { userid, name, password, gender, email, phone, cafe_preferences } = req.body;
 
@@ -32,7 +32,8 @@ router.post('/register', async(req, res, next) => {
             phone,
             cafe_preferences: cafe_preferences || [] // 사용자가 선택하지 않으면 기본값으로 빈 배열
         });
-        await user.save()
+        
+        await newUser.save(); // 수정된 부분
         return res.sendStatus(200);
     } catch (error) {
         next(error);

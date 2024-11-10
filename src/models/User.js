@@ -44,11 +44,6 @@ const userSchema = mongoose.Schema({
         ],
         validate: [arrayLimit, '{PATH} exceeds the limit of 6'], // 최대 6개까지 선택 가능
         default: []
-    },
-    usertype: {
-        type: Number,
-        default: 0,
-        required: true
     }
 },{ timestamps: true }
 )

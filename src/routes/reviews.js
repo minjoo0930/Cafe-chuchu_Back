@@ -4,28 +4,29 @@ const Review = require('../models/Review');
 const Cafe = require('../models/Cafe');
 const auth = require('../middleware/auth');
 
-// 평균 평점 업데이트 함수
-async function updateAverageRating(cafeId) {
+// 평균 평점 및 리뷰 수 업데이트 함수
+async function updateCafeStats(cafeId) {
     const reviews = await Review.find({ cafe_id: cafeId });
-    if (reviews.length === 0) {
-        await Cafe.findByIdAndUpdate(cafeId, { averageRating: 0 });
-        return;
-    }
-    const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
-    await Cafe.findByIdAndUpdate(cafeId, { averageRating });
+
+    const reviewCount = reviews.length;
+    const averageRating = reviewCount > 0
+        ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviewCount
+        : 0;
+
+    await Cafe.findByIdAndUpdate(cafeId, { averageRating, reviewCount });
 }
 
 // 리뷰 작성 (POST /reviews/:cafe_id)
-router.post('/:cafe_id', auth, async(req, res, next) => {
+router.post('/:cafe_id', auth, async (req, res, next) => {
     const { content, rating } = req.body;
-    const cafe_id = req.params.cafe_id;
+    const cafeId = req.params.cafe_id;
     const writer = req.user._id;
 
     try {
-        const newReview = new Review({ content, rating, cafe_id, writer });
+        const newReview = new Review({ content, rating, cafe_id: cafeId, writer });
         await newReview.save();
 
-        await updateAverageRating(cafe_id);
+        await updateCafeStats(cafeId);
         return res.status(201).json({ success: true, review: newReview });
     } catch (error) {
         next(error);
@@ -35,13 +36,13 @@ router.post('/:cafe_id', auth, async(req, res, next) => {
 // 리뷰 수정 (PUT /reviews/:review_id)
 router.put('/:review_id', auth, async (req, res, next) => {
     const { content, rating } = req.body;
-    const review_id = req.params.review_id;
-    const user_id = req.user._id;
+    const reviewId = req.params.review_id;
+    const userId = req.user._id;
 
     try {
-        const review = await Review.findById(review_id);
+        const review = await Review.findById(reviewId);
         if (!review) return res.status(404).json({ success: false, message: 'Review not found' });
-        if (review.writer.toString() !== user_id.toString()) {
+        if (review.writer.toString() !== userId.toString()) {
             return res.status(403).json({ success: false, message: 'You can only edit your own review' });
         }
 
@@ -49,7 +50,7 @@ router.put('/:review_id', auth, async (req, res, next) => {
         review.rating = rating;
         await review.save();
 
-        await updateAverageRating(review.cafe_id);
+        await updateCafeStats(review.cafe_id);
         return res.status(200).json({ success: true, review });
     } catch (error) {
         next(error);
@@ -58,21 +59,37 @@ router.put('/:review_id', auth, async (req, res, next) => {
 
 // 리뷰 삭제 (DELETE /reviews/:review_id)
 router.delete('/:review_id', auth, async (req, res, next) => {
-    const review_id = req.params.review_id;
-    const user_id = req.user._id;
+    const reviewId = req.params.review_id;
+    const userId = req.user._id;
 
     try {
-        const review = await Review.findById(review_id);
+        const review = await Review.findById(reviewId);
         if (!review) return res.status(404).json({ success: false, message: 'Review not found' });
-        if (review.writer.toString() !== user_id.toString()) {
+        if (review.writer.toString() !== userId.toString()) {
             return res.status(403).json({ success: false, message: 'You can only delete your own review' });
         }
 
-        const cafe_id = review.cafe_id;
+        const cafeId = review.cafe_id;
         await review.deleteOne();
 
-        await updateAverageRating(cafe_id);
+        await updateCafeStats(cafeId);
         return res.status(200).json({ success: true, message: 'Review deleted successfully' });
+    } catch (error) {
+        next(error);
+    }
+});
+
+// 특정 카페에 대한 리뷰 수 조회 라우트 (GET /reviews/count/:cafe_id)
+router.get('/count/:cafe_id', async (req, res, next) => {
+    const cafeId = req.params.cafe_id;
+
+    try {
+        const reviewCount = await Review.countDocuments({ cafe_id: cafeId });
+
+        return res.status(200).json({
+            success: true,
+            count: reviewCount
+        });
     } catch (error) {
         next(error);
     }
