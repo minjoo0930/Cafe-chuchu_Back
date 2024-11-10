@@ -18,7 +18,6 @@ router.get('/auth', auth, async (req, res, next) => {
 })
 
 
-// 회원가입 route
 router.post('/register', async (req, res, next) => {
     try {
         const { userid, name, password, gender, email, phone, cafe_preferences } = req.body;
@@ -30,17 +29,21 @@ router.post('/register', async (req, res, next) => {
             gender,
             email,
             phone,
-            cafe_preferences: cafe_preferences || [] // 사용자가 선택하지 않으면 기본값으로 빈 배열
+            cafe_preferences: cafe_preferences || []
         });
-        
-        await newUser.save(); // 수정된 부분
+
+        await newUser.save();
         return res.sendStatus(200);
     } catch (error) {
-        console.error("회원가입 중 오류 발생:", error); // 에러 로그 추가
-        res.status(500).json({ success: false, message: "회원가입 중 오류가 발생했습니다.", error: error.message });
-        next(error);
+        console.error("회원가입 중 오류 발생:", error); // 콘솔에 오류 로그 출력
+        if (error.code === 11000) { // 중복 키 오류 (예: 중복된 이메일)
+            res.status(400).json({ message: '이미 사용 중인 이메일 또는 아이디입니다.' });
+        } else {
+            res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+        }
     }
 });
+
 
 
 //로그인 route
