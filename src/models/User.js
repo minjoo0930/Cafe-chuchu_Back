@@ -15,8 +15,7 @@ const userSchema = mongoose.Schema({
     },
     password : {
         type : String,
-        required : true,
-        minLength: 5
+        required : true
     },
     gender : {
         type : String,
