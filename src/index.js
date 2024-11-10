@@ -22,8 +22,8 @@ mongoose.connect(process.env.MONGO_URI)
     });
 
 // 기본 테스트 라우트
-app.get('/', (req, res) => {
-    res.send('서버가 정상적으로 작동 중입니다.');
+app.get('/', (req, res, next) => {
+    setImmediate(() => { next(new Error('it is an error')) });
 });
 
 app.post('/', (req, res) => {
@@ -54,6 +54,7 @@ app.use('/users', require('./routes/users'));
 app.use('/cafes', require('./routes/cafes'));
 app.use('/reviews', require('./routes/reviews'));
 app.use('/favorites', require('./routes/favorites'));
+app.use('/recommend', require('./routes/recommend'));
 
 // 에러 핸들링 미들웨어
 app.use((error, req, res, next) => {
