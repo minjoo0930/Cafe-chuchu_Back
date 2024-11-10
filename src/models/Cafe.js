@@ -1,30 +1,57 @@
 const { default: mongoose } = require("mongoose");
 
-const cafeSchema = mongoose.Schema({
-    cafe_name : {
+const cafeSchema = new mongoose.Schema({
+    name: { // 카페 이름
         type: String,
-        maxLength: 50
+        maxLength: 50,
+        required: true,
+        trim: true
     },
-    location : {
-        type: String
+    address: { // 카페 주소
+        type: String,
+        required: true
     },
-    category : {
+    rating: { // 카페 평점
+        type: String,
+        default: 0
+    },
+    averageRating: { // 사용자 리뷰를 통한 평균 평점
+        type: Number,
+        default: 0
+    },
+    image_url: { // 이미지 URL 배열로 저장
         type: [String],
         default: []
     },
-    image: {
+    sns_link: { // SNS 링크 배열로 저장
         type: [String],
         default: []
     },
-    open_time: {
-        type: String
+    category: { // 카페 카테고리
+        type: [String],
+        default: []
     },
-    close_time: {
-        type: String
+    review1: { // 첫 번째 리뷰
+        type: String,
+        default: ""
+    },
+    review2: { // 두 번째 리뷰
+        type: String,
+        default: ""
+    },
+    review3: { // 세 번째 리뷰
+        type: String,
+        default: ""
+    },
+    latitude: {  
+        type: Number,
+        default: null
+    },
+    longitude: { 
+        type: Number,
+        default: null
     }
-},{ timestamps: true }
-)
-
+}, { timestamps: true });
 
 const Cafe = mongoose.model('Cafe', cafeSchema);
 

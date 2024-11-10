@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const User = require("../src/models/Cafe");
+const axios = require("axios");
 const fs = require("fs");
-require("dotenv").config({ path: "../.env" });  // .env 파일에서 MongoDB URI를 불러오기 위해 사용
+const Cafe = require("../src/models/Cafe");
+require("dotenv").config({ path: "../.env" });
 
 // MongoDB 연결 설정
 mongoose.connect(process.env.MONGO_URI, {
@@ -10,24 +11,70 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("MongoDB 연결 성공"))
   .catch(err => console.log("MongoDB 연결 실패:", err));
 
-// JSON 파일에서 사용자 데이터 읽기
+// Geocoding API 호출 함수
+async function getCoordinates(address) {
+    const url = `https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode`;
+    try {
+        const response = await axios.get(url, {
+            params: { query: address },
+            headers: {
+                "X-NCP-APIGW-API-KEY-ID": process.env.NAVER_CLIENT_ID,
+                "X-NCP-APIGW-API-KEY": process.env.NAVER_CLIENT_SECRET
+            }
+        });
+        
+        const { addresses } = response.data;
+        if (addresses.length > 0) {
+            return {
+                latitude: parseFloat(addresses[0].y),
+                longitude: parseFloat(addresses[0].x)
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error("좌표 변환 중 오류 발생:", error.response ? error.response.data : error.message);
+        return null;
+    }
+}
+
+// 카페 데이터 가져오기 및 삽입 함수
 const importData = async () => {
     try {
-        const data = fs.readFileSync("./cafes.json", "utf-8");  // JSON 파일 읽기
-        const users = JSON.parse(data);  // JSON 문자열을 자바스크립트 객체로 변환
+        const data = fs.readFileSync("./CafeData_processed.json", "utf-8");
+        const cafes = JSON.parse(data);
 
-        // 각 사용자의 비밀번호를 해시화 후 저장
-        const userPromises = users.map(async (user) => {
-            const newUser = new User(user);
-            await newUser.save();
-        });
+        for (let cafe of cafes) {
+            const coordinates = await getCoordinates(cafe.주소);
+            if (coordinates) {
+                cafe.latitude = coordinates.latitude;
+                cafe.longitude = coordinates.longitude;
+            } else {
+                console.log(`${cafe.이름}의 좌표를 가져올 수 없습니다.`);
+                continue;
+            }
 
-        await Promise.all(userPromises);
+            const newCafe = new Cafe({
+                name: cafe.이름,
+                address: cafe.주소,
+                rating: cafe.평점,
+                image_url: cafe["이미지 주소"],
+                sns_link: cafe["SNS 링크"],
+                category: cafe.category,
+                review1: cafe.리뷰1,
+                review2: cafe.리뷰2,
+                review3: cafe.리뷰3,
+                latitude: cafe.latitude,
+                longitude: cafe.longitude
+            });
+            await newCafe.save();
+            console.log(`${cafe.이름} 저장 완료.`);
+        }
+
         console.log("데이터 삽입 완료!");
     } catch (error) {
         console.error("데이터 삽입 중 오류:", error);
     } finally {
-        mongoose.connection.close();  // 연결 종료
+        mongoose.connection.close();
     }
 };
 

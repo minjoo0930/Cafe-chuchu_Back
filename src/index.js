@@ -22,8 +22,8 @@ mongoose.connect(process.env.MONGO_URI)
     });
 
 // 기본 테스트 라우트
-app.get('/', (req, res, next) => {
-    setImmediate(() => { next(new Error('it is an error')) });
+app.get('/', (req, res) => {
+    res.send('서버가 정상적으로 작동 중입니다.');
 });
 
 app.post('/', (req, res) => {
