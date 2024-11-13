@@ -86,4 +86,34 @@ router.post('/logout', auth, async(req, res, next) => {
     }
 })
 
+
+// 마이페이지 조회 (GET /users/mypage)
+router.get('/mypage', auth, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password'); // 비밀번호 제외
+        if (!user) return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+        return res.json(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// 마이페이지 업데이트 (PUT /users/mypage)
+router.put('/mypage', auth, async (req, res, next) => {
+    try {
+        const { name, email, phone, cafe_preferences } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(
+            req.user._id,
+            { name, email, phone, cafe_preferences },
+            { new: true, runValidators: true }
+        ).select('-password'); // 비밀번호 제외
+
+        if (!updatedUser) return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+        return res.json(updatedUser);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 module.exports = router
