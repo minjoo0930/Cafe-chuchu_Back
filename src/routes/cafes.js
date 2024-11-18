@@ -85,7 +85,10 @@ router.get('/:id', async (req, res, next) => {
     const cafeId = req.params.id;
 
     try {
-        const cafe = await Cafe.findById(cafeId);
+        // 카페 정보를 조회
+        const cafe = await Cafe.findById(cafeId).select(
+            'name rating address category image_url sns_link'
+        );
 
         if (!cafe) {
             return res.status(404).json({ success: false, message: 'Cafe not found' });
@@ -93,15 +96,33 @@ router.get('/:id', async (req, res, next) => {
 
         // 해당 카페 리뷰 가져오기
         const reviews = await Review.find({ cafe_id: cafeId })
-            .populate('writer', 'name')
-            .sort({ createdAt: -1 });
+            .populate('writer', 'name') // 리뷰 작성자의 이름
+            .sort({ createdAt: -1 });  // 최신순으로 정렬
 
-        // 카페 정보와 리뷰 정보 반환
+        // 리뷰 수 계산
+        const reviewCount = reviews.length;
+
+        // 반환할 데이터 구성
         return res.status(200).json({
             success: true,
-            cafe,
-            reviews
-        }); 
+            cafe: {
+                id: cafe._id,
+                name: cafe.name,
+                rating: cafe.rating || '평점 없음',
+                reviewCount: reviewCount,
+                address: cafe.address,
+                category: cafe.category || [], // 분위기 키워드
+                image_url: cafe.image_url || [], // 이미지 URL 배열
+                sns_link: cafe.sns_link || []   // SNS 링크 배열
+            },
+            reviews: reviews.map(review => ({
+                id: review._id,
+                content: review.content,
+                rating: review.rating,
+                writer: review.writer ? review.writer.name : '익명',
+                createdAt: review.createdAt
+            }))
+        });
     } catch (error) {
         next(error);
     }

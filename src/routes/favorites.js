@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Favorite = require('../models/Favorite');
+const Cafe = require('../models/Cafe'); 
+const Review = require('../models/Review'); 
 const auth = require('../middleware/auth');
+
 
 // 카페 찜 추가 (POST /favorites/:cafe_id)
 router.post('/:cafe_id', auth, async (req, res, next) => {
@@ -48,14 +51,42 @@ router.get('/', auth, async (req, res, next) => {
     const userId = req.user._id;
 
     try {
-        // 유저의 찜 목록 조회 (카페 정보도 함께 반환)
+        // 유저의 찜 목록 조회 (카페 정보와 리뷰 개수, 평점 포함)
         const favorites = await Favorite.find({ user_id: userId })
-            .populate('cafe_id', 'cafe_name location category open_time close_time'); // 필요한 카페 정보 가져오기
+            .populate({
+                path: 'cafe_id',
+                select: 'name address image_url rating'
+            });
 
-        return res.status(200).json({ success: true, favorites });
+        // 데이터 포맷 조정
+        const favoriteList = await Promise.all(
+            favorites.map(async (favorite) => {
+                const cafe = favorite.cafe_id;
+
+                if (!cafe) {
+                    return null; // 카페 정보가 없을 경우 처리
+                }
+
+                // 리뷰 개수 계산
+                const reviewCount = await Review.countDocuments({ cafe_id: cafe._id });
+
+                return {
+                    cafe_id: cafe._id,
+                    name: cafe.name,
+                    address: cafe.address,
+                    image_url: cafe.image_url ? cafe.image_url[0] : null, // 첫 번째 이미지
+                    rating: cafe.rating || '평점 없음',
+                    reviewCount
+                };
+            })
+        );
+
+        // null 값을 필터링하여 최종 목록을 반환
+        return res.status(200).json({ success: true, favorites: favoriteList.filter(item => item !== null) });
     } catch (error) {
         next(error);
     }
 });
+
 
 module.exports = router;
