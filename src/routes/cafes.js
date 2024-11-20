@@ -20,33 +20,25 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // 카페 조회 라우트 (Get /cafes/search)
 router.get('/search', async (req, res, next) => {
     const { category, cafe_name, sortByProximity, latitude, longitude } = req.query;
-    const limit = req.query.limit ? Number(req.query.limit) : 10; // 한 페이지에 보여줄 카페 수 (기본 10개)
-    const page = req.query.page ? Number(req.query.page) : 1; // 페이지 번호 (기본값 1)
+    const limit = req.query.limit ? Number(req.query.limit) : 10;
+    const page = req.query.page ? Number(req.query.page) : 1;
     const skip = (page - 1) * limit;
 
     let findArgs = {};
 
-    // 카테고리별 조회
     if (category) findArgs.category = category;
-
-    // 카페 이름 검색 
-    if (cafe_name) {
-        findArgs.name = { $regex: cafe_name, $options: 'i' }; 
-    }
+    if (cafe_name) findArgs.name = { $regex: cafe_name, $options: 'i' };
 
     try {
-        // 모든 조건에 맞는 카페 목록 조회
         let cafes = await Cafe.find(findArgs);
 
-        // 사용자가 가까운 순 정렬을 요청했을 때
         if (sortByProximity === 'true' && latitude && longitude) {
             const userLat = parseFloat(latitude);
             const userLon = parseFloat(longitude);
 
             cafes = cafes.map(cafe => {
                 if (cafe.latitude && cafe.longitude) {
-                    // 거리 계산 후 distance 필드 추가
-                    cafe = cafe.toObject(); // Mongoose 문서를 일반 객체로 변환
+                    cafe = cafe.toObject();
                     cafe.distance = calculateDistance(
                         userLat,
                         userLon,
@@ -57,28 +49,44 @@ router.get('/search', async (req, res, next) => {
                 return cafe;
             });
 
-            // 거리 기준으로 정렬
             cafes.sort((a, b) => a.distance - b.distance);
         }
 
-        // 페이지 처리
         const totalCafes = cafes.length;
-        const paginatedCafes = cafes.slice(skip, skip + limit);
-        const hasMore = skip + limit < totalCafes; // 다음 페이지가 있는지 확인
 
-        // 응답으로 카페 목록 전송
+        // 카페별 추가 정보를 가져오기 위해 `Promise.all`로 처리
+        const enrichedCafes = await Promise.all(
+            cafes.slice(skip, skip + limit).map(async cafe => {
+                const reviewCount = await Review.countDocuments({ cafe_id: cafe._id });
+                const averageRating = await Review.aggregate([
+                    { $match: { cafe_id: cafe._id } },
+                    { $group: { _id: null, averageRating: { $avg: '$rating' } } }
+                ]);
+
+                return {
+                    id: cafe._id,
+                    name: cafe.name,
+                    address: cafe.address,
+                    image_url: cafe.image_url ? cafe.image_url[0] : null, // 첫 번째 이미지
+                    rating: averageRating.length > 0 ? averageRating[0].averageRating.toFixed(1) : '평점 없음',
+                    reviewCount: reviewCount || 0
+                };
+            })
+        );
+
         return res.status(200).json({
             success: true,
-            cafes: paginatedCafes,
-            currentPage: page, 
-            totalPages: Math.ceil(totalCafes / limit), 
-            totalCafes, 
-            hasMore 
+            cafes: enrichedCafes,
+            currentPage: page,
+            totalPages: Math.ceil(totalCafes / limit),
+            totalCafes,
+            hasMore: skip + limit < totalCafes
         });
     } catch (error) {
         next(error);
     }
 });
+
 
 // 카페 상세 페이지 (GET /cafes/:id)
 router.get('/:id', async (req, res, next) => {
