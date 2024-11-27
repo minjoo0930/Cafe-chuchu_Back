@@ -60,14 +60,19 @@ router.get("/:cafe_id", async (req, res, next) => {
 
   try {
     const reviews = await Review.find({ cafe_id: cafeId })
-      .populate("writer", "name") // 작성자 정보 중 이름만 가져오기
+      .populate("writer", "name userid") // 작성자 정보 중 이름과 userid 가져오기
       .sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
       reviews: reviews.map((review) => ({
         id: review._id,
-        writer: review.writer ? review.writer.name : "익명",
+        writer: review.writer
+          ? {
+              name: review.writer.name,
+              userid: review.writer.userid,
+            }
+          : { name: "익명", userid: null },
         content: review.content,
         rating: review.rating,
         createdAt: review.createdAt,
